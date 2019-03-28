@@ -1,0 +1,32 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<h1>Index</h1>
+<hr/>
+变量表达式（OGNL/Spring EL表达式）'${}'以html标签的一个属性来表示：<b th:text="${test}"></b><br/>
+选择表达式 '*{}'（用预先选择的对象来代替上下文变量容器来执行）：
+<b th:object="${shiroUser}">
+    <span th:text="*{username}"></span>
+    <span th:text="*{password}"></span>
+</b><br/>
+另一种获取model元素的方式：<span th:text="${shiroUser.username}"></span><br/>
+
+<b>字符串拼接</b>
+<span th:text="'hel ' + ${shiroUser.username} + '!'"></span>
+简单写法：<span th:text="|hel ${shiroUser.username} !|"></span><br/>
+
+<b>if/unless条件判断</b><br/>
+<span th:if="${shiroUser.username == 'itracybryant'}">itracybryant</span><br/>
+<span th:unless="${shiroUser.username == 'admin'}">itracybryant</span><br/>
+
+<b>for each</b><br/>
+<ol th:each="item, items : ${list}">
+    <li th:text="${items.index}"></li>
+    <li th:text="${item}"></li>
+</ol>
+<br/>
+
+<b>内联js</b>
+<script th:inline="javascript">
+    var username=[[${shiroUser.username}]];
+    console.log(username);
+</script>
+</html>
